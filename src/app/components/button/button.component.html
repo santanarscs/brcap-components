@@ -1,9 +1,0 @@
-<button [class]="classNames">
-  <div *ngIf="!isLoading; else showLoading">
-    {{label}}
-    <ng-content></ng-content>
-  </div>
-  <ng-template #showLoading>
-    <cap-loading></cap-loading>
-  </ng-template>
-</button>
