@@ -1,18 +1,22 @@
 {
   "name": "teste",
   "version": "0.0.0",
+  "schematics": "./schematics/collection.json",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run build:schematics",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "build-storybook": "npm run docs:json && build-storybook",
+    "build:schematics": "tsc -p tsconfig.schematics.json",
+    "postbuild:schematics": "copyfiles src/schematics/*/schema.json src/schematics/*/files/** src/schematics/collection.json ./dist"
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/schematics": "^14.2.7",
     "@angular/animations": "^14.2.0",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
@@ -43,6 +47,7 @@
     "@types/jasmine": "~4.0.0",
     "autoprefixer": "^10.4.12",
     "babel-loader": "^8.2.5",
+    "copyfiles": "^2.4.1",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -52,5 +57,8 @@
     "postcss": "^8.4.17",
     "tailwindcss": "^3.1.8",
     "typescript": "~4.7.2"
+  },
+  "ng-add": {
+    "save": "devDependencies"
   }
 }
